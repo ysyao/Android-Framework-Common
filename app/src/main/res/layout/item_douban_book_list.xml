@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_ui_margin_medium">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/book_image"
+            android:src="@drawable/ic_av_surround_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/activity_ui_margin_medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.7"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="安卓开发"
+                android:textAppearance="?android:textAppearanceMedium"/>
+            <TextView
+                android:id="@+id/book_intro"
+                android:layout_marginTop="@dimen/activity_ui_margin_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本书内容上覆盖了用Android开发的大部分场景，从Android基础介绍、环境搭建、SDK介绍、Market使用，到应用剖析、组件介绍、实例演示等方面。"
+                android:maxLines="2"
+                android:textAppearance="?android:textAppearanceSmall"/>
+            <RatingBar
+                android:rating="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/book_rating"
+                style="?android:ratingBarStyleSmall"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginLeft="@dimen/activity_ui_margin_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@android:color/black"
+            android:padding="@dimen/activity_ui_margin_small"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="获取"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

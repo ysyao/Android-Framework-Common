@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_ui_margin_medium"
+    android:paddingBottom="@dimen/activity_ui_margin_medium"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_toLeftOf="@+id/app_right"
+        android:id="@+id/app_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_ui_margin_medium"/>
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/app_icon"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/app_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="名字"/>
+            <TextView
+                android:id="@+id/app_package_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:text="com.package.name"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:id="@+id/app_right"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/app_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/darker_gray"
+            android:text="dfs"/>
+    </LinearLayout>
+</RelativeLayout>

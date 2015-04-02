@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ILife-Android</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_account">用户登录</string>
+    <string name="action_refresh">刷新</string>
+    <string name="action_move">操作</string>
+    <string name="title_activity_ilife_app_list">已安装app列表</string>
+    <string name="title_activity_photo_view_list">下载图片</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_progress">等待画面</string>
+    <string name="title_activity_item_list">ItemListActivity</string>
+    <string name="title_activity_list_view_animation">ListViewAnimationActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+</resources>

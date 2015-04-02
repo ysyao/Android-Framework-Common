@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/card_red_shape"
+    android:layout_margin="10dp"
+    >
+   <TextView
+       android:id="@+id/cardname"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="慧生活卡一"
+       android:textSize="@dimen/font_size_middle"
+       android:textColor="#434343"
+       android:layout_centerVertical="true"
+       android:layout_marginLeft="25dp"
+       />
+    <Button android:id="@+id/trash"
+             android:layout_height="35dp"
+             android:layout_width="29dp"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="@dimen/activity_horizontal_margin"
+             android:background="@drawable/kdelete_btn_selector"
+             android:layout_centerVertical="true"
+        >
+    </Button>
+</RelativeLayout>
