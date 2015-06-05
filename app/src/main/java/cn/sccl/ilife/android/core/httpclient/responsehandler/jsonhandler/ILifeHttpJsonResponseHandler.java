@@ -1,8 +1,8 @@
 package cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler;
 
 import org.apache.http.Header;
+
 import cn.sccl.ilife.android.core.httpclient.HttpClientUtils;
-import cn.sccl.ilife.android.core.httpclient.ILifeRequestError;
 import cn.sccl.ilife.android.core.httpclient.responsehandler.ILifeHttpResponseHandler;
 
 
@@ -11,7 +11,58 @@ import cn.sccl.ilife.android.core.httpclient.responsehandler.ILifeHttpResponseHa
  *
  * Created by yishiyao on 2015/3/12.
  */
-public abstract class ILifeHttpJsonResponseHandler<T> extends ILifeHttpResponseHandler {
+public class ILifeHttpJsonResponseHandler<T> extends ILifeHttpResponseHandler {
+    public enum JsonType {
+        LIST_OBJECT_TYPE,
+        OBJECT_TYPE;
+    }
+    private Class<T> clazz;
+    private JsonType jsonType = JsonType.OBJECT_TYPE;
+    private ILifeJsonResponseInterface<T> listener;
+
+    public ILifeHttpJsonResponseHandler(Class<T> clazz, ILifeJsonResponseInterface<T> listener) {
+        super();
+        this.clazz = clazz;
+        this.listener = listener;
+        loadJsonType();
+    }
+
+    public ILifeHttpJsonResponseHandler(Class<T> clazz, JsonType jsonType, ILifeJsonResponseInterface<T> listener) {
+        super();
+        this.listener = listener;
+        this.clazz = clazz;
+        this.jsonType = jsonType;
+        loadJsonType();
+    }
+
+    public void setILifeJsonResponse(ILifeJsonResponseInterface<T> listener) {
+        this.listener = listener;
+    }
+
+    public void setParseType(JsonType type) {
+        this.jsonType = type;
+        loadJsonType();
+    }
+
+    public void loadJsonType() {
+        switch (this.jsonType) {
+            case LIST_OBJECT_TYPE:
+                setListType(clazz);
+                break;
+            case OBJECT_TYPE:
+                setType(clazz);
+                break;
+            default:
+                setType(clazz);
+                break;
+        }
+    }
+
+    @Override
+    public void onILifeHttpConnectingFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+        listener.onILifeHttpConnectingFailure(statusCode, headers, responseBody, error);
+    }
+
     @Override
     public JsonListenedAsyncHttpCallbackResponse newInstanceOfListenedResponseHandler() {
         return  new JsonListenedAsyncHttpCallbackResponse() {
@@ -19,19 +70,13 @@ public abstract class ILifeHttpJsonResponseHandler<T> extends ILifeHttpResponseH
             @Override
             public void onSuccess(int statusCode, Header[] headers,
                                   byte[] responseBody) {
-                ILifeRequestError error = HttpClientUtils.parseByte2JsonPojo(
-                        ILifeRequestError.class, null, responseBody);
-                if (HttpClientUtils.isRequestError(error)) {
-                    onILifeRequestFailed(statusCode, headers, responseBody, error);
-                } else {
-                    T resultT = (T)HttpClientUtils.parseByte2JsonPojo(getType(), getListType(),
-                            responseBody);
-                    onILifeRequestSuccess(
-                            statusCode,
-                            headers,
-                            responseBody,
-                            resultT);
-                }
+                T resultT = (T)HttpClientUtils.parseByte2JsonPojo(getType(), getListType(),
+                        responseBody);
+                listener.onILifeRequestSuccess(
+                        statusCode,
+                        headers,
+                        responseBody,
+                        resultT);
             }
 
             @Override
@@ -43,8 +88,4 @@ public abstract class ILifeHttpJsonResponseHandler<T> extends ILifeHttpResponseH
         };
     }
 
-    public abstract void onILifeRequestSuccess(int statusCode,
-                                               Header[] headers, byte[] responseBody, T t);
-    public abstract void onILifeRequestFailed(int statusCode, Header[] headers,
-                                              byte[] responseBody, ILifeRequestError error);
 }

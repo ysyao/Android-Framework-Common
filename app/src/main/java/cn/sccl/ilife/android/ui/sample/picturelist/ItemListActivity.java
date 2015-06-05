@@ -17,6 +17,7 @@ import java.util.List;
 import cn.sccl.ilife.android.R;
 import cn.sccl.ilife.android.core.httpclient.ILifeRequestError;
 import cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler.ILifeHttpJsonResponseHandler;
+import cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler.ILifeJsonResponseInterface;
 import cn.sccl.ilife.android.sample.picturelist.DouBanBook;
 import cn.sccl.ilife.android.sample.picturelist.DouBanBookList;
 import cn.sccl.ilife.android.sample.picturelist.DouBanBookService;
@@ -87,16 +88,12 @@ public class ItemListActivity extends BaseListItemActivity<ItemAdapter, DouBanBo
                 swipeRefreshLayout.setRefreshing(true);
             }
         }, 300);
-        bookService.getBooks(new ILifeHttpJsonResponseHandler<DouBanBookList>() {
+        bookService.getBooks(new ILifeJsonResponseInterface<DouBanBookList>() {
             @Override
             public void onILifeRequestSuccess(int statusCode, Header[] headers, byte[] responseBody, DouBanBookList douBanBookList) {
                 displayData(douBanBookList.getBooks());
             }
 
-            @Override
-            public void onILifeRequestFailed(int statusCode, Header[] headers, byte[] responseBody, ILifeRequestError error) {
-                swipeRefreshLayout.setRefreshing(false);
-            }
 
             @Override
             public void onILifeHttpConnectingFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {

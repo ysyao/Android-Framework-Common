@@ -1,11 +1,14 @@
 package cn.sccl.ilife.android.core.service;
 
 import com.google.inject.Inject;
+import com.loopj.android.http.RequestParams;
 
 import android.content.Context;
 
 import cn.sccl.ilife.android.core.httpclient.ILifeHttpClient;
+import cn.sccl.ilife.android.core.httpclient.ILifeHttpRequestHandler;
 import cn.sccl.ilife.android.core.httpclient.ResponseHandlerCallback;
+import cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler.ILifeHttpJsonResponseHandler;
 
 /**
  * 用于网络行为的发起类，可以通过ILifeHttpClient发起和取消请求，且引入了响应回调onStart,onFinish,onRetry,
@@ -54,5 +57,10 @@ public class ILifeService {
 	 */
 	public void cancelAllRequest(boolean mayInterruptIfRunning) {
 		client.cancelAllRequests(mayInterruptIfRunning);
+	}
+
+	protected ILifeHttpRequestHandler sendRequest(String url,  RequestParams params, ILifeHttpJsonResponseHandler responseHandler) {
+		return new ILifeHttpRequestHandler(client.get(getServiceContext(),
+				url, params, responseHandler));
 	}
 }

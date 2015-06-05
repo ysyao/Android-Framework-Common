@@ -13,6 +13,7 @@ import org.apache.http.Header;
 import cn.sccl.ilife.android.R;
 import cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler.ILifeHttpJsonResponseHandler;
 import cn.sccl.ilife.android.core.httpclient.ILifeRequestError;
+import cn.sccl.ilife.android.core.httpclient.responsehandler.jsonhandler.ILifeJsonResponseInterface;
 import cn.sccl.ilife.android.sample.login.Account;
 import cn.sccl.ilife.android.sample.login.LoginService;
 import cn.sccl.ilife.android.ui.ILifeActivity;
@@ -65,15 +66,10 @@ public class AccountActivity extends ILifeActivity {
      * 登录
      */
     private void login() {
-        loginService.getAccount(new ILifeHttpJsonResponseHandler<Account>() {
+        loginService.getAccount(new ILifeJsonResponseInterface<Account>() {
             @Override
             public void onILifeRequestSuccess(int statusCode, Header[] headers, byte[] responseBody, Account account) {
                 name.setText(account.getUserName() + "/" + account.getUserId());
-            }
-
-            @Override
-            public void onILifeRequestFailed(int statusCode, Header[] headers, byte[] responseBody, ILifeRequestError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
 
             @Override
